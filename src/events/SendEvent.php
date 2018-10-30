@@ -10,5 +10,7 @@ class SendEvent extends Event
     public $subject;
 
     public $message;
+    
+    public $replyTo;
 
 }
