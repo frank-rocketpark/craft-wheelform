@@ -86,7 +86,10 @@ class Mailer extends Component
         $mailMessage->setTextBody($text);
         $mailMessage->setHtmlBody($html_body);
         if ($event->replyTo) {
-            $mailMessage->setReplyTo($event->replyTo);
+            try {
+                $mailMessage->setReplyTo($event->replyTo);
+            } catch (\Exception $e) {
+            }
         }
 
         // Grab any "to" emails set in the form settings.
