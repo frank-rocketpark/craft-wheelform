@@ -39,6 +39,7 @@ class Mailer extends Component
             'form_id' => $form->id,
             'subject' => $defaultSubject,
             'message' => $message,
+            'replyTo' => '',
         ]);
 
         $this->trigger(self::EVENT_BEFORE_SEND, $event);
@@ -84,6 +85,9 @@ class Mailer extends Component
         $mailMessage->setSubject($event->subject);
         $mailMessage->setTextBody($text);
         $mailMessage->setHtmlBody($html_body);
+        if ($event->replyTo) {
+            $mailMessage->setReplyTo($event->replyTo);
+        }
 
         // Grab any "to" emails set in the form settings.
         $to_emails = StringHelper::split($form->to_email);
